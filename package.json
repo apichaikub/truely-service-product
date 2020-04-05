@@ -1,0 +1,14 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Chai",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
