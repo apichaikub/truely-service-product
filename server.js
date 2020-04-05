@@ -1,10 +1,10 @@
 import express from "express"
 
 const app = express()
-const PORT = process.env.PORT || 5001
+const PORT = process.env.PORT || 5002
 
 app.get('/', (req, res) => {
-  res.send('Service Product CI/CD is working fine.')
+  res.send('Service Product')
 })
 
 app.listen(PORT, () => {

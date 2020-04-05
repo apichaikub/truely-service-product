@@ -1,16 +1,22 @@
 {
-  "name": "authentication",
+  "name": "product",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --experimental-modules server.js",
-    "start": "node --experimental-modules server.js"
+    "dev": "nodemon start.js",
+    "start": "node start.js"
   },
   "author": "Chai",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
   },
-  "type": "module"
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "nodemon": "^2.0.2"
+  }
 }
