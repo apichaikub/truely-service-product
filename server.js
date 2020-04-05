@@ -1,7 +1,7 @@
-const express = require('express')
-const app = express()
+import express from "express"
 
-const PORT = process.env.PORT || 5002
+const app = express()
+const PORT = process.env.PORT || 5001
 
 app.get('/', (req, res) => {
   res.send('Service Product')

@@ -1,14 +1,16 @@
 {
-  "name": "product",
+  "name": "authentication",
   "version": "1.0.0",
-  "private": true,
   "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "dev": "nodemon --experimental-modules server.js",
+    "start": "node --experimental-modules server.js"
   },
   "author": "Chai",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "type": "module"
 }
