@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon start.js --exec 'npm run lint'",
+    "dev": "nodemon start.js --exec 'npm run lint && node'",
     "start": "node start.js",
     "lint": "./node_modules/.bin/eslint *.js"
   },
