@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon start.js",
-    "start": "node start.js"
+    "dev": "nodemon start.js --exec 'npm run lint'",
+    "start": "node start.js",
+    "lint": "./node_modules/.bin/eslint *.js"
   },
   "author": "Chai",
   "license": "ISC",
