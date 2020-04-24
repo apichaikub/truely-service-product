@@ -1,13 +1,21 @@
 import Sequelize from 'Sequelize'
 
-const sequelize = new Sequelize({
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
-  host: process.env.POSTGRES_HOST,
-  port: process.env.POSTGRES_PORT,
-  dialect: 'postgres',
-})
+let sequelize = null
+
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+  })
+} else {
+  sequelize = new Sequelize({
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    dialect: 'postgres',
+  })
+}
 
 const models = {
   User: sequelize.import('../models/user'),
