@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start:dev": "nodemon src/start.js --exec 'npm run lint && node'",
-    "start:prd": "node start.js",
+    "start:prd": "node src/start.js",
     "lint": "./node_modules/.bin/eslint src/*.js"
   },
   "author": "Chai",
