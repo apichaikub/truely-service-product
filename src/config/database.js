@@ -3,7 +3,6 @@ import Sequelize from 'sequelize'
 let sequelize = null
 
 // this work on product heroku provide use env `DATABASE_URL`.
-console.log('process.env.DATABASE_URL', process.env.DATABASE_URL)
 if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
