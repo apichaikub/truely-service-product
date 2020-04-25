@@ -6,8 +6,13 @@ export default gql`
     }
 
     type User {
+        id: String!,
         username: String!,
         createdAt: String!,
         updatedAt: String!,
+    }
+
+    type Mutation {
+        createUser(username: String!, password: String!): User!
     }
 `
