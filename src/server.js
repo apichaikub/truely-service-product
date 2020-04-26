@@ -1,7 +1,7 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import config from './config'
-import typeDefs from './graphql/schema'
+import typeDefs from './graphql/typedefs'
 import resolvers from './graphql/resolvers'
 import { getUser } from './graphql/authorization'
 import { models } from './models'
