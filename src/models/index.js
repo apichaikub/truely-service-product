@@ -22,5 +22,8 @@ Object.keys(models).forEach((key) => {
 // for all tables including: users, products and skus
 faker(postgresdb, models)
 
-export { postgresdb, models }
+export {
+  postgresdb,
+  models,
+}
 
