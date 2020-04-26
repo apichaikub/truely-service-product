@@ -1,4 +1,5 @@
 import { DataTypes } from 'sequelize'
+import { isValidAttributes as isValid } from '../../utils/validator'
 
 export default {
   skuId: {
@@ -16,6 +17,13 @@ export default {
   attributes: {
     type: DataTypes.JSON,
     defaultValue: [],
+    validate: {
+      isEven: (attributes) => {
+        if (!isValid(attributes)) {
+          throw new Error('attributes is invalid format.')
+        }
+      },
+    },
   },
   price: {
     type: DataTypes.DECIMAL(10, 2),
