@@ -1,4 +1,4 @@
-import DataTypes from 'sequelize/lib/data-types'
+import { DataTypes } from 'sequelize'
 
 export default {
   productId: {
@@ -7,8 +7,23 @@ export default {
     primaryKey: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
+  },
+  detail: {
+    type: DataTypes.TEXT,
+  },
+  specifications: {
+    type: DataTypes.JSON,
+    defaultValue: [],
+  },
+  rating: {
+    type: DataTypes.DECIMAL(2, 1),
+    defaultValue: 0.00,
+    validate: {
+      isFloat: true,
+      len: [0, 5],
+    },
   },
   imageSmall: {
     type: DataTypes.STRING,
