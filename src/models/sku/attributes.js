@@ -1,4 +1,4 @@
-import DataTypes from 'sequelize/lib/data-types'
+import { DataTypes } from 'sequelize'
 
 export default {
   skuId: {
@@ -12,28 +12,23 @@ export default {
   },
   code: {
     type: DataTypes.STRING,
-    defaultValue: true,
   },
   attributes: {
     type: DataTypes.JSON,
     defaultValue: [],
   },
   price: {
-    // eslint-disable-next-line new-cap
     type: DataTypes.DECIMAL(10, 2),
   },
   inStock: {
-    // eslint-disable-next-line new-cap
     type: DataTypes.DECIMAL(10, 2),
   },
   discountType: {
-    // eslint-disable-next-line new-cap
     type: DataTypes.ENUM({
       values: ['PERCENTAGE', 'CURRENTCY'],
     }),
   },
   discountAmount: {
-    // eslint-disable-next-line new-cap
     type: DataTypes.DECIMAL(10, 2),
   },
   imageSmall: {

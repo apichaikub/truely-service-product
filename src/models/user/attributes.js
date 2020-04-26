@@ -1,4 +1,4 @@
-import DataTypes from 'sequelize/lib/data-types'
+import { DataTypes } from 'sequelize'
 
 export default {
   userId: {
@@ -15,7 +15,6 @@ export default {
     allowNull: false,
   },
   role: {
-    // eslint-disable-next-line new-cap
     type: DataTypes.ENUM({
       values: ['USER', 'ADMIN'],
     }),
