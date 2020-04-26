@@ -18,6 +18,7 @@ export default {
           return models.User.create({
             username: args.username,
             password: args.password,
+            role: args.role,
           })
         },
     ),
