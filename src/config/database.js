@@ -20,6 +20,8 @@ if (process.env.DATABASE_URL) {
 
 const models = {
   User: sequelize.import('../models/user'),
+  Product: sequelize.import('../models/product'),
+  Sku: sequelize.import('../models/sku'),
 }
 
 Object.keys(models).forEach((key) => {
@@ -28,12 +30,26 @@ Object.keys(models).forEach((key) => {
   }
 })
 
-sequelize.sync({ force: true }).then(() => {
-  models.User.create({
+sequelize.sync({ force: true }).then(async () => {
+  const { User, Product, Sku } = models
+
+  await User.create({
     username: 'chai001',
     password: '123456',
-  }).then((r) => {
-    console.log('create success')
+    role: 'ADMIN',
+  })
+
+  const product = await Product.create({
+    name: 'product 001',
+  })
+
+  await Sku.create({
+    code: 'SHIRT-BLUE-M',
+    attributes: [{ 'name': 'size', 'option': 'M' }],
+    price: 2500,
+    inStock: 30,
+    discountType: 'PERCENTAGE',
+    productId: product.productId,
   })
 })
 
