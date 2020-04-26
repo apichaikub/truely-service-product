@@ -1,4 +1,5 @@
-import { users, products } from './data'
+import users from './users'
+import products from './products'
 
 export default async (postgresdb, { User, Product, Sku }) => {
   postgresdb.sync({ force: true }).then(async () => {
@@ -16,7 +17,7 @@ export default async (postgresdb, { User, Product, Sku }) => {
         }
       }
     } catch (e) {
-      throw Error(e)
+      throw new Error(e)
     }
   })
 }
