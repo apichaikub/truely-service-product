@@ -22,7 +22,8 @@ export default {
     defaultValue: 0.00,
     validate: {
       isFloat: true,
-      len: [0, 5],
+      min: 0,
+      max: 5,
     },
   },
   imageSmall: {
