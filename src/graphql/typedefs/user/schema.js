@@ -8,4 +8,14 @@ export default gql`
     createdAt: String,
     updatedAt: String,
   }
+
+  type UserUpdateResponse {
+    users: [User!]
+  }
+
+  input UserCreateInput {
+    username: String!,
+    password: String!,
+    role: String!,
+  }
 `

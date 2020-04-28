@@ -7,11 +7,9 @@ export default {
         isLoggedIn,
         isAdmin,
         (root, args, { models: { User } }) => {
-          return User.create({
-            username: args.username,
-            password: args.password,
-            role: args.role,
-          })
+          return {
+            users: User.bulkCreate(args.data),
+          }
         },
     ),
   },
