@@ -5,5 +5,9 @@ export default gql`
     createSku(
       data: [SkuCreateInput!]
     ): SkuCreateResponse!
+
+    updateSku(
+      data: [SkuUpdateInput!]
+    ): [Int!]
   }
 `

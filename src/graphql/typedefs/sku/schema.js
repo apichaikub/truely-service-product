@@ -6,7 +6,7 @@ export default gql`
       isAvailable: Boolean!,
       code: String,
       attributes: [AttributeType!],
-      price: Float!,
+      price: Float,
       inStock: Float,
       discountType: DiscountEnum,
       discountAmount: Float,
@@ -33,7 +33,22 @@ export default gql`
     }
 
     input SkuCreateInput {
-      isAvailable: Boolean!,
+      isAvailable: Boolean,
+      code: String,
+      attributes: [AttributeInput!],
+      price: Float,
+      inStock: Float,
+      discountType: DiscountEnum,
+      discountAmount: Float,
+      imageSmall: String,
+      imageMedium: String,
+      imageLarge: String,
+      productId: String,
+    }
+
+    input SkuUpdateInput {
+      skuId: Boolean,
+      isAvailable: Boolean,
       code: String,
       attributes: [AttributeInput!],
       price: Float,
