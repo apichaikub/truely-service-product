@@ -1,6 +1,6 @@
 import { postgresdb } from '../database'
 import { updateMany } from '../helper/model'
-import faker from '../utils/faker'
+import faker from '../helper/faker'
 
 // import all models here
 // can be use with multiple databases
