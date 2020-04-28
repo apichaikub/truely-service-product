@@ -14,8 +14,17 @@ export default gql`
     updatedAt: String,
   }
 
+  input ProductCreateInput {
+    name: String,
+    detail: String,
+    specifications: [String!],
+    rating: Float,
+    imageSmall: String,
+    imageMedium: String,
+    imageLarge: String,
+  }
+
   type ProductCreateResponse {
-    product: Product!,
-    skus: [Sku!],
+    products: [Product!],
   }
 `

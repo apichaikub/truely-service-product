@@ -1,40 +1,38 @@
 import { combineResolvers } from 'graphql-resolvers'
 import { isLoggedIn, isAdmin } from '../../authorization'
-import { isArray } from '../../../utils/lib'
+import { getAllKeysExcept } from '../../../utils/lib'
+import { RESPONSE_STATUS } from '../../../utils/enum'
 
 export default {
   Mutation: {
     createProduct: combineResolvers(
         isLoggedIn,
         isAdmin,
-        async (root, args, { models: { Product, Sku } }) => {
-          const product = await Product.create({
-            name: args.name,
-            detail: args.detail,
-            specifications: args.specifications,
-            rating: args.rating,
-            imageSmall: args.imageSmall,
-            imageMedium: args.imageMedium,
-            imageLarge: args.imageLarge,
-          })
-
-          let skus = []
-
-          if (isArray(args.skus)) {
-            const skusInput = args.skus.map((sku) => {
-              return {
-                ...sku,
-                productId: product.productId,
-              }
-            })
-
-            skus = Sku.bulkCreate(skusInput)
-          }
+        async (root, args, { models: { Product } }) => {
+          const products = Product.bulkCreate(args.data)
 
           return {
-            product,
-            skus,
+            products,
           }
+        },
+    ),
+
+    updateProduct: combineResolvers(
+        isLoggedIn,
+        isAdmin,
+        async (root, args, { models: { Product } }) => {
+          const values = getAllKeysExcept(args, ['productId', 'skus'])
+          const options = {
+            where: {
+              productId: args.productId,
+            },
+          }
+
+          const product = await Product.update(values, options)
+
+          return product[0]?
+            RESPONSE_STATUS.SUCCESS :
+            RESPONSE_STATUS.FAIL
         },
     ),
   },
