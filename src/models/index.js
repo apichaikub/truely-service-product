@@ -1,4 +1,5 @@
 import { postgresdb } from '../database'
+import { updateMany } from '../helper/model'
 import faker from '../utils/faker'
 
 // import all models here
@@ -12,8 +13,14 @@ const models = {
 // set association to the models that was declared
 // such as: hasMeny, belongsTo or ect.
 Object.keys(models).forEach((key) => {
-  if ('associate' in models[key]) {
-    models[key].associate(models)
+  const model = models[key]
+
+  if ('associate' in model) {
+    model.associate(models)
+  }
+
+  model.updateMany = (data, options) => {
+    return updateMany(model, data, options)
   }
 })
 
