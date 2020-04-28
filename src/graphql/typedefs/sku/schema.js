@@ -47,7 +47,7 @@ export default gql`
     }
 
     input SkuUpdateInput {
-      skuId: Boolean,
+      skuId: String!,
       isAvailable: Boolean,
       code: String,
       attributes: [AttributeInput!],
@@ -58,7 +58,6 @@ export default gql`
       imageSmall: String,
       imageMedium: String,
       imageLarge: String,
-      productId: String,
     }
 
     enum DiscountEnum {

@@ -8,6 +8,6 @@ export default gql`
 
     updateSku(
       data: [SkuUpdateInput!]
-    ): [Int!]
+    ): [String!]
   }
 `

@@ -13,5 +13,15 @@ export default {
           }
         },
     ),
+
+    updateSku: combineResolvers(
+        isLoggedIn,
+        isAdmin,
+        async (root, args, { models: { Sku } }) => {
+          return Sku.updateMany(args.data, {
+            primaryId: 'skuId',
+          })
+        },
+    ),
   },
 }
