@@ -7,14 +7,7 @@ export default gql`
     ): ProductCreateResponse!
 
     updateProduct(
-      productId: String!,
-      name: String,
-      detail: String,
-      specifications: [String!],
-      rating: Float,
-      imageSmall: String,
-      imageMedium: String,
-      imageLarge: String,
-    ): String!
+      data: [ProductUpdateInput!]
+    ): [String!]
   }
 `

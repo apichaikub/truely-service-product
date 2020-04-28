@@ -24,6 +24,17 @@ export default gql`
     imageLarge: String,
   }
 
+  input ProductUpdateInput {
+    productId: String!,
+    name: String,
+    detail: String,
+    specifications: [String!],
+    rating: Float,
+    imageSmall: String,
+    imageMedium: String,
+    imageLarge: String,
+  }
+
   type ProductCreateResponse {
     products: [Product!],
   }

@@ -21,18 +21,26 @@ export default {
         isLoggedIn,
         isAdmin,
         async (root, args, { models: { Product } }) => {
-          const values = getAllKeysExcept(args, ['productId', 'skus'])
-          const options = {
-            where: {
-              productId: args.productId,
-            },
+          const results = []
+
+          for (const input of args.data) {
+            const values = getAllKeysExcept(input, ['productId', 'skus'])
+            const options = {
+              where: {
+                productId: input.productId,
+              },
+            }
+
+            const product = await Product.update(values, options)
+
+            const result = product[0]?
+              RESPONSE_STATUS.SUCCESS :
+              RESPONSE_STATUS.FAIL
+
+            results.push(result)
           }
 
-          const product = await Product.update(values, options)
-
-          return product[0]?
-            RESPONSE_STATUS.SUCCESS :
-            RESPONSE_STATUS.FAIL
+          return results
         },
     ),
   },
