@@ -28,9 +28,24 @@ const allkeysEqual = (value, dataType) => {
   return true
 }
 
+const getAllKeysExcept = (values = {}, keys = []) => {
+  if (!isObject(values) || !isArray(keys)) {
+    return
+  }
+
+  return Object.keys(values).reduce((result, key) => {
+    if (!keys.includes(key)) {
+      result[key] = values[key]
+    }
+
+    return result
+  }, {})
+}
+
 export {
   isNull,
   isArray,
   isObject,
   allkeysEqual,
+  getAllKeysExcept,
 }
