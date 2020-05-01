@@ -1,4 +1,4 @@
-import { RESPONSE_STATUS } from '../../utils/enum'
+import { RESPONSE_STATUS } from '../../helper/enum'
 import { getAllKeysExcept } from '../../utils/lib'
 
 const updateMany = async (model, data, options) => {
@@ -16,8 +16,8 @@ const updateMany = async (model, data, options) => {
     const response = await model.update(values, options)
 
     const result = response[0]?
-      RESPONSE_STATUS.SUCCESS :
-      RESPONSE_STATUS.FAIL
+      RESPONSE_STATUS.ENUM.SUCCESS :
+      RESPONSE_STATUS.ENUM.FAIL
 
     results.push(result)
   }

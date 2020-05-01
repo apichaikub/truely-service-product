@@ -13,12 +13,12 @@ export default [
   {
     username: 'user1',
     password: '123456',
-    role: 'USER',
+    role: 'GUEST',
   },
   {
     username: 'user2',
     password: '123456',
-    role: 'USER',
+    role: 'GUEST',
   },
   {
     username: 'admin3',

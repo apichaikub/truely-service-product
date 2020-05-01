@@ -1,4 +1,5 @@
 import { DataTypes } from 'sequelize'
+import { USER_ROLE } from '../../helper/enum'
 
 export default {
   userId: {
@@ -22,7 +23,7 @@ export default {
   },
   role: {
     type: DataTypes.ENUM({
-      values: ['USER', 'ADMIN'],
+      values: USER_ROLE.values,
     }),
     defaultValue: null,
   },

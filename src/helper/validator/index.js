@@ -1,4 +1,4 @@
-import { isArray, allkeysEqual } from '../lib'
+import { isArray, allkeysEqual } from '../../utils/lib'
 
 const createValidator = (...tests) => {
   return (value) => {
