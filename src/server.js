@@ -21,7 +21,10 @@ const server = new ApolloServer({
   },
 })
 
-server.applyMiddleware({ app, path: graphqlPath })
+server.applyMiddleware({
+  app,
+  path: graphqlPath,
+})
 
 app.use(router)
 
