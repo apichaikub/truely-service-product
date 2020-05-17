@@ -8,4 +8,9 @@ export default {
       'uri': process.env.DATABASE_URL,
     },
   },
+
+  // services api
+  'services': {
+    'authentication': process.env.SERVICE_AUTHENTICATION,
+  },
 }

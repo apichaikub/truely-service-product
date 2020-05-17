@@ -4,18 +4,20 @@ import config from './config'
 import typeDefs from './graphql/typedefs'
 import resolvers from './graphql/resolvers'
 import { getUser } from './graphql/authorization'
+import { TOKEN } from './helper/enum'
 import { models } from './models'
 import router from './routes'
 
 const { port } = config
+const { ENUM: { ACCESS_TOKEN, REFRESH_TOKEN } } = TOKEN
 const app = express()
 const graphqlPath = '/graphql'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
+  context: async ({ req: { headers } }) => {
     return {
-      user: getUser(req.headers.authorization),
+      user: await getUser(headers[ACCESS_TOKEN], headers[REFRESH_TOKEN]),
       models,
     }
   },

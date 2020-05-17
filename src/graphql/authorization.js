@@ -1,26 +1,40 @@
+import AuthService from '../services/authService'
 import { AuthenticationError } from 'apollo-server-express'
+import { USER_ROLE } from '../helper/enum'
 
-export const getUser = (accessToken = '') => {
-  if (!accessToken) {
+const getUser = async (accessToken, refreshToken) => {
+  try {
+    if (!accessToken) {
+      throw Error()
+    }
+
+    const authService = new AuthService()
+    const response = await authService.verifyAuth(accessToken, refreshToken)
+    const data = response.data.data
+
+    return {
+      id: data.user.id,
+      role: data.user.role,
+    }
+  } catch (error) {
     return null
   }
-
-  return {
-    accessToken,
-    userId: 1,
-    username: 'apichaikub',
-    roles: ['admin'],
-  }
 }
 
-export const isLoggedIn = (root, args, { user }) => {
+const isLoggedIn = (root, args, { user }) => {
   if (user === null) {
-    throw new AuthenticationError('you must be logged in')
+    throw new AuthenticationError('Unauthorized')
   }
 }
 
-export const isAdmin = (root, args, { user }) => {
-  if (user.roles.includes('admin') === false) {
-    throw new AuthenticationError('you are not admin')
+const isAdmin = (root, args, { user }) => {
+  if (user.role !== USER_ROLE.ENUM.ADMIN) {
+    throw new AuthenticationError('Admin role is required')
   }
+}
+
+export {
+  getUser,
+  isLoggedIn,
+  isAdmin,
 }
