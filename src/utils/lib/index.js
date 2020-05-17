@@ -2,6 +2,10 @@ const isNull = (value) => {
   return value === null
 }
 
+const isString = (value) => {
+  return typeof value === 'string'
+}
+
 const isArray = (value) => {
   return Array.isArray(value)
 }
@@ -42,10 +46,31 @@ const getAllKeysExcept = (values = {}, keys = []) => {
   }, {})
 }
 
+const pick = (obj, keys) => {
+  if (!isObject(obj) || !isString(keys) && !isArray(keys)) {
+    return {}
+  }
+
+  if (isString(keys)) {
+    return {
+      [keys]: obj[keys],
+    }
+  }
+
+  return keys.reduce((result, key) => {
+    if (obj.hasOwnProperty(key)) {
+      result[key] = obj[key]
+    }
+    return result
+  }, {})
+}
+
 export {
   isNull,
+  isString,
   isArray,
   isObject,
   allkeysEqual,
   getAllKeysExcept,
+  pick,
 }
