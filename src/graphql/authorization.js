@@ -1,8 +1,9 @@
 import AuthService from '../services/authService'
 import { AuthenticationError } from 'apollo-server-express'
-import { USER_ROLE } from '../helper/enum'
+import { USER_ROLE, TOKEN } from '../helper/enum'
+import { pick } from '../utils/lib'
 
-const getUser = async (accessToken, refreshToken) => {
+const getAuth = async (accessToken, refreshToken) => {
   try {
     if (!accessToken) {
       throw Error()
@@ -12,12 +13,20 @@ const getUser = async (accessToken, refreshToken) => {
     const response = await authService.verifyAuth(accessToken, refreshToken)
     const data = response.data.data
 
-    return {
+    const user = {
       id: data.user.id,
       role: data.user.role,
     }
+    const newTokens = {
+      ...pick(response.headers, TOKEN.values),
+    }
+
+    return {
+      user,
+      newTokens,
+    }
   } catch (error) {
-    return null
+    return {}
   }
 }
 
@@ -34,7 +43,7 @@ const isAdmin = (root, args, { user }) => {
 }
 
 export {
-  getUser,
+  getAuth,
   isLoggedIn,
   isAdmin,
 }

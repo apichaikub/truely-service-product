@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express'
 import config from './config'
 import typeDefs from './graphql/typedefs'
 import resolvers from './graphql/resolvers'
-import { getUser } from './graphql/authorization'
+import { getAuth } from './graphql/authorization'
 import { TOKEN } from './helper/enum'
 import { models } from './models'
 import router from './routes'
@@ -15,9 +15,21 @@ const graphqlPath = '/graphql'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req: { headers } }) => {
+  context: async ({ req: { headers }, res }) => {
+    const auth = await getAuth(headers[ACCESS_TOKEN], headers[REFRESH_TOKEN])
+    const user = auth.user || null
+    const newTokens = auth.tokens || {}
+
+    if (Object.keys(newTokens).length) {
+      // The clients able to access custom headers
+      res.set('Access-Control-Expose-Headers', TOKEN.values.join(', '))
+      // set response headers
+      res.set(ACCESS_TOKEN, newTokens[ACCESS_TOKEN])
+      res.set(REFRESH_TOKEN, newTokens[REFRESH_TOKEN])
+    }
+
     return {
-      user: await getUser(headers[ACCESS_TOKEN], headers[REFRESH_TOKEN]),
+      user,
       models,
     }
   },
