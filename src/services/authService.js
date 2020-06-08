@@ -15,7 +15,7 @@ export default class AuthService {
   verifyAuth(accessToken, refreshToken) {
     return axios({
       method: 'post',
-      url: `${config.services.authentication}verify/auth`,
+      url: `${config.services.authorization}verify/auth`,
       headers: {
         [TOKEN.ENUM.ACCESS_TOKEN]: accessToken,
         [TOKEN.ENUM.REFRESH_TOKEN]: refreshToken,

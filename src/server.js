@@ -5,8 +5,10 @@ import typeDefs from './graphql/typedefs'
 import resolvers from './graphql/resolvers'
 import { getAuth } from './graphql/authorization'
 import { TOKEN } from './helper/enum'
+import { postgreUserDB } from './database'
 import { models } from './models'
 import router from './routes'
+import faker from './helper/faker'
 
 const { port } = config
 const { ENUM: { ACCESS_TOKEN, REFRESH_TOKEN } } = TOKEN
@@ -41,6 +43,11 @@ server.applyMiddleware({
 })
 
 app.use(router)
+
+postgreUserDB.sync({ force: true }).then(() => {
+  faker(models)
+  console.log('product service sync to postgreUserDB success.')
+})
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`)

@@ -1,5 +1,5 @@
-import { postgresdb } from './postgres'
+import { postgreUserDB } from './postgres'
 
 export {
-  postgresdb,
+  postgreUserDB,
 }

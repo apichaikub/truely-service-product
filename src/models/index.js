@@ -1,13 +1,12 @@
-import { postgresdb } from '../database'
+import { postgreUserDB } from '../database'
 import { updateMany } from '../helper/model'
-import faker from '../helper/faker'
 
 // import all models here
 // can be use with multiple databases
 const models = {
-  User: postgresdb.import('../models/user'),
-  Product: postgresdb.import('../models/product'),
-  Sku: postgresdb.import('../models/sku'),
+  // User: postgreUserDB.import('../models/user'),
+  Product: postgreUserDB.import('../models/product'),
+  Sku: postgreUserDB.import('../models/sku'),
 }
 
 // set association to the models that was declared
@@ -24,13 +23,7 @@ Object.keys(models).forEach((key) => {
   }
 })
 
-// every time server is started, this function to
-// clear all data and insert new one to the `postgres`
-// for all tables including: users, products and skus
-faker(postgresdb, models)
-
 export {
-  postgresdb,
   models,
 }
 

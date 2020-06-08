@@ -1,23 +1,16 @@
-import users from './users'
 import products from './products'
 
-export default async (postgresdb, { User, Product, Sku }) => {
-  postgresdb.sync({ force: true }).then(async () => {
-    try {
-      for (const user of users) {
-        await User.create(user)
-      }
+export default async ({ Product, Sku }) => {
+  try {
+    for (const product of products) {
+      const newProduct = await Product.create(product)
 
-      for (const product of products) {
-        const newProduct = await Product.create(product)
-
-        for (const sku of product.skus || []) {
-          sku.productId = newProduct.productId
-          await Sku.create(sku)
-        }
+      for (const sku of product.skus || []) {
+        sku.productId = newProduct.productId
+        await Sku.create(sku)
       }
-    } catch (e) {
-      throw new Error(e)
     }
-  })
+  } catch (e) {
+    throw new Error(e)
+  }
 }

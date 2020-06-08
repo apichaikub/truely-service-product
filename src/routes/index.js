@@ -6,12 +6,12 @@ router.get('/', (req, res) => {
   res.send('Service Product.')
 })
 
-router.get('/product', (req, res) => {
-  res.send('Test route /product')
+router.get('/products', (req, res) => {
+  res.send('products')
 })
 
-router.get('/product/1', (req, res) => {
-  res.send('Test route /product/1')
+router.get('/products/1', (req, res) => {
+  res.send('a product')
 })
 
 router.get('*', (req, res) => {

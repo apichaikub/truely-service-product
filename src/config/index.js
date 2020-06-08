@@ -5,12 +5,12 @@ export default {
   // use `sequelize` to connect multiple databases `src/config/database.js`.
   'databases': {
     'postgres': {
-      'uri': process.env.DATABASE_URL,
+      'uri': process.env.DATABASE_URL_PRODUCT,
     },
   },
 
   // services api
   'services': {
-    'authentication': process.env.SERVICE_AUTHENTICATION,
+    'authorization': process.env.SERVICE_AUTHORIZATION,
   },
 }
