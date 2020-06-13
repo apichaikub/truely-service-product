@@ -35,8 +35,16 @@ const isAdmin = (root, args, { user }) => {
   }
 }
 
+const hasPermissionProductWrite = (root, args, { user }) => {
+  const requireScope = 'product.write'
+  if (!user.scopes.includes(requireScope)) {
+    throw new AuthenticationError(`scope ${requireScope} is required`)
+  }
+}
+
 export {
   getAuth,
   isLoggedIn,
   isAdmin,
+  hasPermissionProductWrite,
 }
