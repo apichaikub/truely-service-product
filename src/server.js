@@ -4,7 +4,7 @@ import config from './config'
 import typeDefs from './graphql/typedefs'
 import resolvers from './graphql/resolvers'
 import { getAuth } from './graphql/authorization'
-import { postgreUserDB } from './database'
+import { postgreProductDB } from './database'
 import { models } from './models'
 import router from './routes'
 import faker from './helper/faker'
@@ -32,9 +32,9 @@ server.applyMiddleware({
 
 app.use(router)
 
-postgreUserDB.sync({ force: true }).then(() => {
+postgreProductDB.sync({ force: true }).then(() => {
   faker(models)
-  console.log('product service sync to postgreUserDB success.')
+  console.log('product service sync to postgreProductDB success.')
 })
 
 app.listen(port, () => {

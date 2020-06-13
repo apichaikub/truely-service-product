@@ -1,12 +1,12 @@
-import { postgreUserDB } from '../database'
+import { postgreProductDB } from '../database'
 import { updateMany } from '../helper/model'
 
 // import all models here
 // can be use with multiple databases
 const models = {
-  // User: postgreUserDB.import('../models/user'),
-  Product: postgreUserDB.import('../models/product'),
-  Sku: postgreUserDB.import('../models/sku'),
+  // User: postgreProductDB.import('../models/user'),
+  Product: postgreProductDB.import('../models/product'),
+  Sku: postgreProductDB.import('../models/sku'),
 }
 
 // set association to the models that was declared

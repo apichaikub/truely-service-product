@@ -2,10 +2,10 @@ import Sequelize from 'sequelize'
 import config from '../config/'
 
 // connect to progres
-const postgreUserDB = new Sequelize(config.databases.postgres.product, {
+const postgreProductDB = new Sequelize(config.databases.postgres.product, {
   dialect: 'postgres',
 })
 
 export {
-  postgreUserDB,
+  postgreProductDB,
 }
