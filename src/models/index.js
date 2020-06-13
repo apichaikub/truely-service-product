@@ -4,7 +4,6 @@ import { updateMany } from '../helper/model'
 // import all models here
 // can be use with multiple databases
 const models = {
-  // User: postgreProductDB.import('../models/user'),
   Product: postgreProductDB.import('../models/product'),
   Sku: postgreProductDB.import('../models/sku'),
 }
