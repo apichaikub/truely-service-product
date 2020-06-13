@@ -1,11 +1,11 @@
 import { combineResolvers } from 'graphql-resolvers'
-import { isLoggedIn, isAdmin } from '../../authorization'
+import { isLoggedIn, hasPermissionProductWrite } from '../../authorization'
 
 export default {
   Mutation: {
     createSku: combineResolvers(
         isLoggedIn,
-        isAdmin,
+        hasPermissionProductWrite,
         (root, args, { models: { Sku } }) => {
           const skus = Sku.bulkCreate(args.data)
           return {
@@ -16,7 +16,7 @@ export default {
 
     updateSku: combineResolvers(
         isLoggedIn,
-        isAdmin,
+        hasPermissionProductWrite,
         async (root, args, { models: { Sku } }) => {
           return Sku.updateMany(args.data, {
             primaryId: 'skuId',
