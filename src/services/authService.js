@@ -1,6 +1,5 @@
 import axios from 'axios'
 import config from '../config'
-import { TOKEN } from '../helper/enum'
 
 /**
  * AuthService
@@ -8,17 +7,17 @@ import { TOKEN } from '../helper/enum'
 export default class AuthService {
   /**
    *
-   * @param {String} accessToken
-   * @param {String} refreshToken
-   * @return { Object } response
+   * @param {String} tokenType
+   * @param {String} tokenValue
+   * @return { Object }
    */
-  verifyAuth(accessToken, refreshToken) {
+  verifyToken(tokenType, tokenValue) {
     return axios({
       method: 'post',
-      url: `${config.services.authorization}verify/auth`,
-      headers: {
-        [TOKEN.ENUM.ACCESS_TOKEN]: accessToken,
-        [TOKEN.ENUM.REFRESH_TOKEN]: refreshToken,
+      url: `${config.gateway.api}tokenvalidation/verify`,
+      data: {
+        tokenType: tokenType,
+        accessToken: tokenValue,
       },
     })
   }

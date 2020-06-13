@@ -13,4 +13,9 @@ export default {
   'services': {
     'authorization': process.env.SERVICE_AUTHORIZATION,
   },
+
+  // gateway api
+  'gateway': {
+    'api': process.env.API_GATEWAY,
+  },
 }

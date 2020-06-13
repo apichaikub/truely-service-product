@@ -1,32 +1,25 @@
 import AuthService from '../services/authService'
 import { AuthenticationError } from 'apollo-server-express'
-import { USER_ROLE, TOKEN } from '../helper/enum'
-import { pick } from '../utils/lib'
+import { USER_ROLE } from '../helper/enum'
+import { getToken } from '../helper/auth'
 
-const getAuth = async (accessToken, refreshToken) => {
+const getAuth = async (accessToken) => {
   try {
     if (!accessToken) {
       throw Error()
     }
 
     const authService = new AuthService()
-    const response = await authService.verifyAuth(accessToken, refreshToken)
-    const data = response.data.data
-
-    const user = {
-      id: data.user.id,
-      role: data.user.role,
-    }
-    const newTokens = {
-      ...pick(response.headers, TOKEN.values),
-    }
+    const [tokenType, tokenValue] = getToken(accessToken)
+    const { data } = await authService.verifyToken(tokenType, tokenValue)
 
     return {
-      user,
-      newTokens,
+      userId: data.results.userId,
+      role: data.results.role,
+      scopes: data.results.scopes,
     }
   } catch (error) {
-    return {}
+    return null
   }
 }
 
