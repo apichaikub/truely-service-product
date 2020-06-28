@@ -8,10 +8,13 @@ import { postgreProductDB } from './database'
 import { models } from './models'
 import router from './routes'
 import faker from './helper/faker'
+import cors from 'cors'
 
-const { port } = config
 const app = express()
-const graphqlPath = '/graphql'
+
+// Enable All CORS Requests
+app.use(cors())
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -27,7 +30,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({
   app,
-  path: graphqlPath,
+  path: '/graphql',
 })
 
 app.use(router)
@@ -37,6 +40,6 @@ postgreProductDB.sync({ force: true }).then(() => {
   console.log('product service sync to postgreProductDB success.')
 })
 
-app.listen(port, () => {
-  console.log(`Running on port: ${port}`)
+app.listen(config.port, () => {
+  console.log(`Running on port: ${config.port}`)
 })
