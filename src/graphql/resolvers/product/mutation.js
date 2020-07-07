@@ -17,9 +17,22 @@ export default {
         isLoggedIn,
         hasPermissionProductWrite,
         async (root, args, { models: { Product } }) => {
-          return Product.updateMany(args.data, {
-            primaryId: 'productId',
-          })
+          const values = args.data
+          const options = { primaryId: 'productId' }
+          return Product.updateMany(values, options)
+        },
+    ),
+
+    deleteProduct: combineResolvers(
+        isLoggedIn,
+        hasPermissionProductWrite,
+        async (root, args, { models: { Product } }) => {
+          const values = args.ids.map((id) =>({
+            productId: id,
+            deletedAt: new Date(),
+          }))
+          const options = { primaryId: 'productId' }
+          return Product.updateMany(values, options)
         },
     ),
   },

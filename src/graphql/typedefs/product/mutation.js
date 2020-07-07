@@ -9,5 +9,9 @@ export default gql`
     updateProduct(
       data: [ProductUpdateInput!]
     ): [String!]
+
+    deleteProduct(
+      ids: [ID!]
+    ): [String!]
   }
 `

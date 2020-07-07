@@ -7,5 +7,15 @@ export default {
           return Product.findAll()
         },
     ),
+    product: combineResolvers(
+        (root, args, { models: { Product } }) => {
+          console.log('args', args)
+          return Product.findOne({
+            where: {
+              productId: args.id,
+            },
+          })
+        },
+    ),
   },
 }
